@@ -6,21 +6,20 @@ import { Box } from "@mui/system";
 import * as React from "react";
 import { useState, useCallback } from "react";
 import { PushSpinner } from "react-spinners-kit";
-// require("dotenv").config();
 
 export default function FreeSolo() {
-  // console.log(process.env.NODE_ENV);
-  // const URL = process.env.APP_URL;
-
+  // console.log(process.env);
   const [departureOptions, setDepartureOptions] = useState([]);
   const [returnOptions, setReturnOptions] = useState([]);
   const [departureValue, setDepartureValue] = useState("");
   const [returnValue, setReturnValue] = useState("");
   const [loading, setLoading] = useState(false);
 
+
   // Declare a function to handle the search form submission
   const handleSearchFormSubmit = (event) => {
     event.preventDefault();
+    searchJourneys(departureValue, returnValue, setDepartureOptions, setReturnOptions, setLoading);
   };
 
   // // Declare a function to handle the search input change
@@ -33,11 +32,11 @@ export default function FreeSolo() {
   // };
 
   const searchJourneys = useCallback((departureValue, returnValue) => {
-    setLoading(true);
-    console.log(departureValue, returnValue);
-    // if (!departureValue) {
+    // if (!departureValue ) {
     //   return;
     // }
+
+    setLoading(true);
 
     fetch(
       `http://localhost:3001/search?departure_station=${departureValue}&return_station=${returnValue}`,
@@ -47,7 +46,12 @@ export default function FreeSolo() {
         },
       }
     )
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        return response.json();
+      })
       .then((data) => {
         // Use the data here
         setDepartureOptions(data);
@@ -62,13 +66,7 @@ export default function FreeSolo() {
 
   React.useEffect(() => {
     searchJourneys(departureValue, returnValue);
-    // console.log(departureValue, returnValue);
   }, [departureValue, returnValue, searchJourneys]);
-  console.log({ departureOptions });
-
-  // useEffect(() => {
-  //   searchJourneys();
-  // }, []);
 
   // useEffect(() => {
   //   async function getData(value1,value2) {

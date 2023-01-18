@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import FreeSolo from "./components/Autocomplete";
-import Home from "./components/Home";
+import Home from "./components/pages/Home";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import "./App.css";
-import { Autocomplete } from "@mui/material";
+// import { Autocomplete } from "@mui/material";
 // import { Button } from '@material-ui/core';
 
 const App = () => {
@@ -35,7 +35,7 @@ const App = () => {
         <Routes>
           {/* <Route path="/" exact /> */}
           <Route path="/" element={<FreeSolo />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/home" exact element={<Home />} />
         </Routes>
         <br/>
         {/* <FreeSolo /> */}
