@@ -8,18 +8,19 @@ function HeroSection() {
     <div className="hero-container">
       <video src="/videos/video-2.mp4" autoPlay loop muted />
       <h1>HELSINKI BIKE SEARCH</h1>
-      <p>What are you looking for?</p>
-      <div className="hero-btn">
+      <p>What are you searching for?</p>
+      <div className="hero-btns">
         <Button2
           className="btns"
           buttonStyle="btn--outline"
           buttonSize="btn--large"
-        >JOURNEYS</Button2>
+        >JOURNEYS
+        </Button2>
         <Button2
           className="btns"
           buttonStyle="btn--primary"
           buttonSize="btn--large"
-        >STATIONS <i className='far fa-play-circle' />
+        >STATIONS <i class="fa-solid fa-location-crosshairs"/>
         </Button2>
       </div>
     </div>
