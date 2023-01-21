@@ -20,7 +20,7 @@ function HeroSection() {
           className="btns"
           buttonStyle="btn--primary"
           buttonSize="btn--large"
-        >STATIONS <i class="fa-solid fa-location-crosshairs"/>
+        >STATIONS <i className="fa-solid fa-location-crosshairs"/>
         </Button2>
       </div>
     </div>

@@ -34,7 +34,7 @@ const GithubLink = styled.a`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 0.3rem;
+  margin-inline-start: 0.3rem;
   font-size: 2rem;
   transition: transform 0.15s ease-in-out;
   &:hover {

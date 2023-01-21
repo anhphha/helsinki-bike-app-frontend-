@@ -5,8 +5,6 @@ import Home from "./components/pages/Home";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import "./App.css";
-// import { Autocomplete } from "@mui/material";
-// import { Button } from '@material-ui/core';
 
 const App = () => {
   // //Client input

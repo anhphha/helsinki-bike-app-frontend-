@@ -9,17 +9,23 @@ import { PushSpinner } from "react-spinners-kit";
 
 export default function FreeSolo() {
   // console.log(process.env);
+  const URL = process.env.REACT_APP_BIKE_URL;
   const [departureOptions, setDepartureOptions] = useState([]);
   const [returnOptions, setReturnOptions] = useState([]);
   const [departureValue, setDepartureValue] = useState("");
   const [returnValue, setReturnValue] = useState("");
   const [loading, setLoading] = useState(false);
 
-
   // Declare a function to handle the search form submission
   const handleSearchFormSubmit = (event) => {
     event.preventDefault();
-    searchJourneys(departureValue, returnValue, setDepartureOptions, setReturnOptions, setLoading);
+    searchJourneys(
+      departureValue,
+      returnValue,
+      setDepartureOptions,
+      setReturnOptions,
+      setLoading
+    );
   };
 
   // // Declare a function to handle the search input change
@@ -31,42 +37,48 @@ export default function FreeSolo() {
   //   setReturnValue(event.target.value);
   // };
 
-  const searchJourneys = useCallback((departureValue, returnValue) => {
-    // if (!departureValue ) {
-    //   return;
-    // }
+  const searchJourneys = useCallback(
+    (departureValue, returnValue) => {
+      // if (!departureValue || !returnValue) {
+      //   return;
+      // }
 
-    setLoading(true);
+      setLoading(true);
 
-    fetch(
-      `http://localhost:3001/search?departure_station=${departureValue}&return_station=${returnValue}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(response.statusText);
+      fetch(
+        `${URL}/search?departure_station=${departureValue}&return_station=${returnValue}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-        return response.json();
-      })
-      .then((data) => {
-        // Use the data here
-        setDepartureOptions(data);
-        setReturnOptions(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        // Handle the error here
-        console.error(error);
-      });
-  }, []);
+      )
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(response.statusText);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // Use the data here
+          setDepartureOptions(data);
+          setReturnOptions(data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          // Handle the error here
+          console.error(error);
+        });
+    },
+    [URL]
+  );
+
+  // console.log(departureOptions,returnOptions);
 
   React.useEffect(() => {
     searchJourneys(departureValue, returnValue);
   }, [departureValue, returnValue, searchJourneys]);
+  console.log(departureValue, returnValue);
 
   // useEffect(() => {
   //   async function getData(value1,value2) {
